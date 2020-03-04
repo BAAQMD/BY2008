@@ -35,7 +35,7 @@ import_annual_data_ <- function (...) {
     filter(
       ems_qty > 0) %>%
     mutate(
-      pol_abbr = as.character(pol_abbr), ems_unit = "tons/day") %>%
+      pol_abbr = as.character(pol_abbr), ems_unit = "ton/day") %>%
     select(
       year, cat_id, pol_abbr, ems_qty, ems_unit) %>%
     ensure_distinct(
@@ -63,8 +63,8 @@ BY2008_annual <-
     BY2008_P_data,
     BY2008_A_data) %>%
   convert_units(
-    from = "tons/day",
-    to = "tons/yr") %>%
+    from = "ton/day",
+    to = "ton/yr") %>%
   select(
     year,
     cat_id,
