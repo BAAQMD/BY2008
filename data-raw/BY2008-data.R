@@ -95,7 +95,7 @@ BY2008_A_data <-
   mutate(
     cat_id = str_c("A", cat_id))
 
-BY2008_annual <-
+BY2008_annual_emission_data <-
   bind_rows(
     BY2008_P_data,
     BY2008_A_data) %>%
@@ -111,15 +111,12 @@ BY2008_annual <-
   with_comment(
     "BY2008 area source emissions, by category, 1990—2030.")
 
-#
-# Make a copy whose name is consistent with the newer
-# `BY*_annual_emission_data` convention.
-#
-BY2008_annual_emission_data <-
-  BY2008_annual
+delayedAssign(
+  "BY2008_annual",
+  message("`BY2008_annual` is deprecated. Please use `BY2008_annual_emission_data` instead."))
 
 # Save the datasets to the same .Rda file
 usethis::use_data(
-  BY2008_annual,
   BY2008_annual_emission_data,
+  #BY2008_annual,
   overwrite = TRUE)
