@@ -111,6 +111,10 @@ BY2008_annual_emission_data <-
   with_comment(
     "BY2008 area source emissions, by category, 1990—2030.")
 
+usethis::use_data(
+  BY2008_annual_emission_data,
+  overwrite = TRUE)
+
 delayedAssign(
   "BY2008_annual",
   {
@@ -118,8 +122,6 @@ delayedAssign(
     get("BY2008_annual_emission_data")
   })
 
-# Save the datasets to the same .Rda file
-usethis::use_data(
-  BY2008_annual_emission_data,
+save(
   BY2008_annual,
-  overwrite = TRUE)
+  file = here::here("data", "BY2008_annual.rda"))
