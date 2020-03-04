@@ -17,7 +17,7 @@ import_annual_data_ <- function (...) {
       -season,
       -cat_type) %>%
     ensure(
-    min(.$year) == 1990) %>%
+      min(.$year) == 1990) %>%
     ensure(
       max(.$year) == 2030) %>%
     ensure_distinct(
@@ -36,8 +36,6 @@ import_annual_data_ <- function (...) {
       PM, TOG, NOx, SO2, CO, CO2, CH4, N2O, `HFC+PFC`, CO2_bio, SF6) %>%
     mutate(
       ems_qty = parse_double(ems_qty)) %>%
-    filter(
-      ems_qty > 0) %>%
     mutate(
       pol_abbr = as.character(pol_abbr),
       ems_unit = "ton/day") %>%
@@ -53,6 +51,17 @@ import_annual_data_ <- function (...) {
       pol_abbr) %>%
     ensure(
       is.integer(.$cat_id))
+
+  #
+  # FIXME: don't filter(ems_qty > 0). Instead, drop groups (cat_id, pol_abbr)
+  # when all ems_qty == 0, just like BY2011_annual_emission_data.
+  #
+  filtered_data <-
+    tidied_data %>%
+    filter(
+      ems_qty > 0)
+
+  return(filtered_data)
 
 }
 
@@ -84,7 +93,15 @@ BY2008_annual <-
   with_comment(
     "BY2008 area source emissions, by category, 1990—2030.")
 
+#
+# Make a copy whose name is consistent with the newer
+# `BY*_annual_emission_data` convention.
+#
+BY2008_annual_emission_data <-
+  BY2008_annual
+
 # Save the datasets to the same .Rda file
 usethis::use_data(
   BY2008_annual,
+  BY2008_annual_emission_data,
   overwrite = TRUE)
