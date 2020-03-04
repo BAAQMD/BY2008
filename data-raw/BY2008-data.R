@@ -75,6 +75,6 @@ BY2008_annual <-
     "BY2008 area source emissions, by category, 1990—2030.")
 
 # Save the datasets to the same .Rda file
-devtools::use_data(
+usethis::use_data(
   BY2008_annual,
   overwrite = TRUE)
