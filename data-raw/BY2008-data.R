@@ -1,11 +1,7 @@
 library(inventory)
 
-prj_path <- function (...) {
-  file.path(rprojroot::find_root("DESCRIPTION"), ...)
-}
-
 import_annual_data_ <- function (...) {
-  prj_path("data-raw", ...) %>%
+  here::here("data-raw", ...) %>%
     read_csv(col_types = "icicdddddddddd") %>%
     ensure(all_true(.$season == "Annual")) %>%
     select(-season, -cat_type) %>%
