@@ -117,5 +117,5 @@ BY2008_annual <-
 # Save the datasets to the same .Rda file
 usethis::use_data(
   BY2008_annual_emission_data,
-  BY2008_annual,
+  #BY2008_annual,
   overwrite = TRUE)

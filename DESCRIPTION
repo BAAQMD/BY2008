@@ -5,6 +5,9 @@ Version: 2020.03.04
 Author: David Holstius
 Maintainer: David Holstius <dholstius@baaqmd.gov>
 Description: Provides BY2008 Annual Emission Data.
+Depends:
+  tbltools,
+  yeartools
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
