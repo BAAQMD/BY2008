@@ -111,9 +111,8 @@ BY2008_annual_emission_data <-
   with_comment(
     "BY2008 area source emissions, by category, 1990—2030.")
 
-delayedAssign(
-  "BY2008_annual",
-  print("`BY2008_annual` is deprecated. Please use `BY2008_annual_emission_data` instead."))
+BY2008_annual <-
+  "`BY2008_annual` is deprecated. Please use `BY2008_annual_emission_data` instead."
 
 # Save the datasets to the same .Rda file
 usethis::use_data(
