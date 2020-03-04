@@ -7,7 +7,8 @@ import_annual_data_ <- function (...) {
       "data-raw",
       ...)
 
-  csv_path %>%
+  csv_data<-
+    csv_path %>%
     read_csv(
       col_types = "icicdddddddddd") %>%
     ensure(
@@ -15,17 +16,20 @@ import_annual_data_ <- function (...) {
     select(
       -season,
       -cat_type) %>%
-    rename(
-      CO2_bio = BCO2,
-      `HFC+PFC` = HFC,
-      SO2 = SOx) %>%
     ensure(
-      min(.$year) == 1990) %>%
+    min(.$year) == 1990) %>%
     ensure(
       max(.$year) == 2030) %>%
     ensure_distinct(
       year,
-      cat_id) %>%
+      cat_id)
+
+  tidied_data <-
+    csv_data %>%
+    rename(
+      CO2_bio = BCO2,
+      `HFC+PFC` = HFC,
+      SO2 = SOx) %>%
     gather(
       pol_abbr,
       ems_qty,
@@ -35,15 +39,21 @@ import_annual_data_ <- function (...) {
     filter(
       ems_qty > 0) %>%
     mutate(
-      pol_abbr = as.character(pol_abbr), ems_unit = "ton/day") %>%
+      pol_abbr = as.character(pol_abbr),
+      ems_unit = "ton/day") %>%
     select(
-      year, cat_id, pol_abbr, ems_qty, ems_unit) %>%
+      year,
+      cat_id,
+      pol_abbr,
+      ems_qty,
+      ems_unit) %>%
     ensure_distinct(
       year,
       cat_id,
       pol_abbr) %>%
     ensure(
       is.integer(.$cat_id))
+
 }
 
 BY2008_P_data <-
