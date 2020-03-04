@@ -113,10 +113,10 @@ BY2008_annual_emission_data <-
 
 delayedAssign(
   "BY2008_annual",
-  message("`BY2008_annual` is deprecated. Please use `BY2008_annual_emission_data` instead."))
+  print("`BY2008_annual` is deprecated. Please use `BY2008_annual_emission_data` instead."))
 
 # Save the datasets to the same .Rda file
 usethis::use_data(
   BY2008_annual_emission_data,
-  #BY2008_annual,
+  BY2008_annual,
   overwrite = TRUE)
